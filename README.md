@@ -1,4 +1,6 @@
- ML Internship Starter
+ #ML Internship Starter
+
+ 
 This repository is a notebook-first machine learning starter for the FlyRank internship workflow. It is designed to teach a complete, reproducible ML loop:
 
 inspect the raw data,
