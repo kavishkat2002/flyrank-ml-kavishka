@@ -1,17 +1,18 @@
 # FlyRank ML Internship Starter
 
-This repository is a **notebook-first machine learning starter** for the FlyRank internship workflow.  
-It is designed to teach a complete, reproducible ML loop:
+A notebook-first machine learning starter for the FlyRank internship workflow.
 
-- Inspect raw data
+This project walks through a complete and reproducible ranking pipeline:
+
+- Explore raw data
 - Build an interpretable baseline
-- Compare with a simple model
-- Work with the full release through DuckDB
-- Produce shareable artifacts
+- Compare against a simple model
+- Work with full-release tables using DuckDB
+- Generate shareable outputs
 
-The repo currently contains three notebooks under `notebooks/` and no production `src/` package yet.
+---
 
-## Repository Layout
+## Repository Structure
 
 ```text
 .
@@ -22,27 +23,33 @@ The repo currently contains three notebooks under `notebooks/` and no production
     └── 03_working_with_the_full_release.ipynb
 ```
 
-## Notebook Roles
+The repository is currently notebook-driven and does not yet include a production `src/` package.
 
-### `01_first_look_and_discovery.ipynb`
-- Local/Colab setup
-- Pipeline execution
-- First-pass discovery from the starter CSV
+---
 
-### `02_your_first_readable_model.ipynb`
-- Transparent baseline rules
-- Shallow decision trees
-- Leakage examples
+## Learning Path
+
+### 1) `01_first_look_and_discovery.ipynb`
+- Environment setup (local and Colab)
+- Starter pipeline execution
+- Initial exploration of the starter CSV
+
+### 2) `02_your_first_readable_model.ipynb`
+- Transparent rule-based baseline
+- Shallow decision tree modeling
+- Leakage examples and prevention
 - Client-aware validation
 
-### `03_working_with_the_full_release.ipynb`
-- Hugging Face release access via DuckDB
-- SQL feature engineering
-- First model on release tables
+### 3) `03_working_with_the_full_release.ipynb`
+- Accessing Hugging Face release data through DuckDB
+- SQL-based feature engineering
+- First model on release-scale tables
 
-## Technical Stack
+Run notebooks in this order: `01` → `02` → `03`.
 
-The notebooks assume:
+---
+
+## Prerequisites
 
 - Python 3.11+
 - `pandas`
@@ -52,52 +59,29 @@ The notebooks assume:
 - `duckdb`
 - `huggingface_hub`
 
-When running in Colab, notebooks may clone the upstream starter repository and install dependencies from `requirements.txt` if present.  
-Locally, notebooks walk up to the repository root and expect the shipped data layout to exist.
+> In Colab, setup cells may clone the upstream starter repository and install from `requirements.txt` (if available).  
+> Locally, notebooks expect the repository data layout to be present.
 
-## Data Contracts
+---
 
-The notebooks rely on:
+## Data Requirements
 
-- Local starter dataset:  
-  `data/raw/content_refresh_anonymized.csv`
+The notebooks depend on:
+
+- Local starter dataset: `data/raw/content_refresh_anonymized.csv`
 - Hugging Face release tables:
   - `dim_clients`
   - `dim_content`
   - `fact_content_daily_performance`
   - `fact_content_query_90d`
 
-If either data source changes, update notebook assumptions before changing model logic.
+If these sources change, update notebook assumptions before changing model logic.
 
-## What This Workflow Demonstrates
+---
 
-This starter is intentionally opinionated:
+## Quick Start
 
-- Baseline ranking should be understandable before it is accurate
-- Ranking metrics should be prioritized over generic classification accuracy
-- Client-level leakage must be avoided in evaluation
-- Feature engineering should be deterministic
-- Release-scale data should be aggregated in SQL before passing to pandas/scikit-learn
-
-## Running the Notebooks
-
-### Colab
-
-1. Open the notebook
-2. Run the setup cell
-3. Execute notebooks in order: `01` → `02` → `03`
-
-> `03_working_with_the_full_release.ipynb` requires a Hugging Face read token.  
-> Prefer setting `HF_TOKEN` as an environment variable or Colab secret (do not paste tokens into prompts).
-
-### Local
-
-1. Open the repository root in VS Code or Jupyter
-2. Ensure the starter CSV exists at:  
-   `data/raw/content_refresh_anonymized.csv`
-3. Execute notebooks in order
-
-Example setup:
+### Local Setup
 
 ```bash
 python -m venv .venv
@@ -105,35 +89,62 @@ source .venv/bin/activate
 pip install pandas numpy scikit-learn matplotlib duckdb huggingface_hub
 ```
 
+Then:
+1. Open the repository root in VS Code or Jupyter.
+2. Confirm `data/raw/content_refresh_anonymized.csv` exists.
+3. Run notebooks in sequence (`01` → `02` → `03`).
+
+### Colab Setup
+
+1. Open a notebook in Colab.
+2. Run the setup cell.
+3. Execute notebooks in sequence (`01` → `02` → `03`).
+
+> `03_working_with_the_full_release.ipynb` requires a Hugging Face read token.  
+> Set `HF_TOKEN` as an environment variable or a Colab secret. Do not paste tokens into prompts.
+
+---
+
 ## Expected Outputs
 
-The notebooks should produce:
+After completing the notebooks, you should have:
 
-- Console summaries of data and model metrics
-- Precision/recall analysis charts
-- Readable tree exports and baseline comparisons
-- DuckDB query outputs for full-release feature engineering
+- Dataset and metric summaries in notebook output
+- Precision/recall analysis visualizations
+- Readable tree artifacts and baseline comparisons
+- DuckDB query outputs for release-scale features
 
-## Engineering Notes
+---
 
-Keep the repository notebook-driven until the workflow stabilizes.  
-If extending to a production package, separate concerns clearly:
+## Engineering Principles
+
+This starter intentionally emphasizes:
+
+- Interpretability before complexity
+- Ranking-focused evaluation over generic classification metrics
+- Strict prevention of client-level leakage
+- Deterministic feature engineering
+- SQL-first aggregation for release-scale data before pandas/scikit-learn
+
+If this workflow is later promoted to production code, separate responsibilities into:
 
 - Data loading and validation
-- Feature generation
+- Feature engineering
 - Training and evaluation
 - Artifact generation
-- Deployment/reporting
+- Deployment and reporting
 
-Always keep evaluation client-aware, avoid leakage, and document any feature that would not exist before the target event.
+---
 
 ## Contributing
 
-- Keep changes small and traceable
-- Update notebooks and README together when workflow changes
-- Preserve notebook order unless there is a strong reason to reshuffle the teaching flow
-- Add reproducible setup steps for any new dependency
+- Keep changes small, traceable, and well-scoped.
+- Update notebooks and README together when workflow behavior changes.
+- Preserve notebook order unless there is a strong reason to change the learning flow.
+- Add reproducible setup steps for any new dependency.
+
+---
 
 ## License
 
-Add the project license here once finalized.
+Add the project license information once finalized.
